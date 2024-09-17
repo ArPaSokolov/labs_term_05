@@ -1,0 +1,14 @@
+#CMake
+
+*.vcxproj*
+*.cmake
+*.txt
+*.sln
+CMakeFiles
+*.vs
+ext
+*.dir
+Debug
+x64
+!CMakeLists.txt
+
