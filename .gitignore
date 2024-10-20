@@ -12,6 +12,9 @@ Debug
 x64
 !CMakeLists.txt
 
+#VS Code
+.vscode
+
 #RTS
 
 Task.docx
