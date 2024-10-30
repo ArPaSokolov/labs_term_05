@@ -81,11 +81,8 @@ int main() {
     
     std::cout << std::fixed << std::setprecision(4) << std::showpoint;
     int n = 16;
-    // std::cout << "Интегрирование методом Адамса 3-го порядка:" << std::endl; 
-    // notChecked = thirdOrderAdams(a, b, n, y0, z0);
-
-    std::cout << "Интегрирование методом Адамса 4-го порядка:" << std::endl; 
-    notChecked = forthOrderAdams(a, b, n, y0, z0);
+    std::cout << "Интегрирование методом Адамса 3-го порядка:" << std::endl; 
+    notChecked = thirdOrderAdams(a, b, n, y0, z0);
 
     do {
         checked = notChecked;
@@ -93,24 +90,30 @@ int main() {
         notChecked = thirdOrderAdams(a, b, n, y0, z0);
     } while (!checkAccuracy(checked, notChecked, eps));
 
-    std::cout << "Последние 16 узлов из " << n/2 << " предпоследней итерации:" << std::endl;
-    int count = 0;
-    for (const auto& [x, y] : checked) {
-        if (count > n / 2 - 16) {
-            std::cout << "x = " << x << "   y = " << y << std::endl;
-        }
-        count++;
-    }
-    std::cout << std::endl;
+    // std::cout << "Интегрирование методом Адамса 4-го порядка:" << std::endl; 
+    // notChecked = forthOrderAdams(a, b, n, y0, z0);
 
-    count = 0;
-    std::cout << "Последние 32 узла из " << n << " последней итерации:" << std::endl;
+    // do {
+    //     checked = notChecked;
+    //     n *= 2;
+    //     notChecked = forthOrderAdams(a, b, n, y0, z0);
+    // } while (!checkAccuracy(checked, notChecked, eps));
+
+    int count = -1;
     for (const auto& [x, y] : notChecked) {
         if (count > n - 32) {
-            std::cout << "x = " << x << "   y = " << y << std::endl;
+            std::cout << "x = " << x << "   y1 = " << y;
+            if (checked[x]){
+                std::cout << "   y2 = " << checked[x] << std::endl;
+            }
+            else {
+                std::cout << std::endl;
+            }
         }
         count++;
     }
+    std::cout << "Для расчетов с заданной точностью потребовалось " << count << " узлов" << std::endl;
+    std::cout << std::endl;
    
 
     // std::cout << "Интегрирование методом Адамса 4-го порядка:" << std::endl; 

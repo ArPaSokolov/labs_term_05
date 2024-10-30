@@ -30,14 +30,39 @@ int main() {
         double exactFirstDerivative = firstDerivative(x);
         double exactSecondDerivative = secondDerivative(x);
 
+        std::cout << x << std::fixed << std::setprecision(4) << std::showpoint << "   " << f(x) << "      ";
+
         // Вычисление производных
-        double leftFirstDerivative = (f(x) - f(x - h)) / h;
-        double rightFirstDerivative = (f(x + h) - f(x)) / h;
-        double centralFirstDerivative = (f(x + h) - f(x - h)) / (2 * h);
-        double secondDerivative = (f(x - h) - 2 * f(x) + f(x + h)) / (h * h);
+        if (x - h < start) {
+            std::cout << "Не сущ        ";
+        } else {
+            double leftFirstDerivative = (f(x) - f(x - h)) / h;
+            std::cout << leftFirstDerivative << "        ";
+        }
+
+        if (x + h > end) {
+            std::cout << "Не сущ          ";
+        } else {
+            double rightFirstDerivative = (f(x + h) - f(x)) / h;
+            std::cout <<  rightFirstDerivative << "          ";
+        }
+
+        if (x - h < start || x + h > end) {
+            std::cout << "Не сущ      ";
+        } else {
+            double centralFirstDerivative = (f(x + h) - f(x - h)) / (2 * h);
+            std::cout << centralFirstDerivative << "      ";
+        }
+
+        if (x - h < start || x + h > end) {
+            std::cout << "Не сущ       ";
+        } else {
+            double secondDerivative = (f(x - h) - 2 * f(x) + f(x + h)) / (h * h);
+            std::cout << secondDerivative << "       ";
+        }
 
         // Вывод значений
-        std::cout << x << std::fixed << std::setprecision(4) << std::showpoint << "   " << f(x) << "      " << leftFirstDerivative << "        " << rightFirstDerivative << "          " << centralFirstDerivative << "      " << secondDerivative << "       " << exactFirstDerivative << "        " << exactSecondDerivative << std::setprecision(1) << std::endl;
+        std::cout << exactFirstDerivative << "        " << exactSecondDerivative << std::setprecision(1) << std::endl;
     }
 
     // Таблица погрешностей
@@ -48,20 +73,43 @@ int main() {
         double exactFirstDerivative = firstDerivative(x);
         double exactSecondDerivative = secondDerivative(x);
 
-        // Вычисление производных
-        double leftFirstDerivative = (f(x) - f(x - h)) / h;
-        double rightFirstDerivative = (f(x + h) - f(x)) / h;
-        double centralFirstDerivative = (f(x + h) - f(x - h)) / (2 * h);
-        double secondDerivative = (f(x - h) - 2 * f(x) + f(x + h)) / (h * h);
+        std::cout << x << std::setprecision(5) << "     ";
 
-        // Вычисление погрешностей
-        double errorLeft = std::abs(exactFirstDerivative - leftFirstDerivative);
-        double errorRight = std::abs(exactFirstDerivative - rightFirstDerivative);
-        double errorCentral = std::abs(exactFirstDerivative - centralFirstDerivative);
-        double errorSecond = std::abs(exactSecondDerivative - secondDerivative);
+        // Вычисление производных
+        if (x - h < start) {
+            std::cout << " Не сущ        ";
+        }
+        else {
+            double leftFirstDerivative = (f(x) - f(x - h)) / h;
+            std::cout << std::abs(exactFirstDerivative - leftFirstDerivative) << "        ";
+        }
+
+        if (x + h > end) {
+            std::cout << " Не сущ          ";
+        }
+        else {
+            double rightFirstDerivative = (f(x + h) - f(x)) / h;
+            std::cout << std::abs(exactFirstDerivative - rightFirstDerivative) << "          ";
+        }
+
+        if (x - h < start || x + h > end) {
+            std::cout << " Не сущ      ";
+        }
+        else {
+            double centralFirstDerivative = (f(x + h) - f(x - h)) / (2 * h);
+            std::cout << std::abs(exactFirstDerivative - centralFirstDerivative) << "      ";
+        }
+
+        if (x - h < start || x + h > end) {
+            std::cout << " Не сущ       ";
+        }
+        else {
+            double secondDerivative = (f(x - h) - 2 * f(x) + f(x + h)) / (h * h);
+            std::cout << std::abs(exactSecondDerivative - secondDerivative) << "       ";
+        }
 
         // Вывод погрешностей
-        std::cout << x << std::setprecision(5) << "     " << errorLeft << "        " << errorRight << "        " << errorCentral << "           " << errorSecond << std::setprecision(1) << std::endl;
+        std::cout << std::setprecision(1) << std::endl;
     }
 
     return 0;
