@@ -12,7 +12,7 @@ int coins = 100;
 int count = 0;
 
 
-void Func(std::string name)
+void coin_sharing(std::string name)
 {   
     
     while (coins > 0) {
@@ -47,8 +47,8 @@ int main()
     int start = coins;
     
     std::cout << std::endl;
-    std::thread thread1(Func, "Боб");
-    std::thread thread2(Func, "Том");
+    std::thread thread1(coin_sharing, "Боб");
+    std::thread thread2(coin_sharing, "Том");
     thread1.join();
     thread2.join();
 
