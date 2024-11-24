@@ -11,11 +11,11 @@ public:
     void Cook(int efficiencyFactor, std::chrono::time_point<std::chrono::high_resolution_clock> start) {
 
         while (true) {
-            std::lock_guard<std::mutex> lock(m);
+            m.lock();
 
             if ((std::chrono::high_resolution_clock::now() - start) >= std::chrono::seconds(5))
             {
-                std::cout << "Прошло 5 дней => Кук уволился сам!" << std::endl;
+                std::cout << "\033[1;32mПрошло 5 дней => Кук уволился сам!\033[0m" << std::endl;
                 exit(1); // конец программы
             }
 
@@ -24,7 +24,8 @@ public:
             dish2 += efficiencyFactor;
             dish3 += efficiencyFactor;
 
-            std::this_thread::yield();
+            m.unlock();
+            std::this_thread::sleep_for(std::chrono::milliseconds(1)); // искусственно создаю возможность начать работу другому потоку 
         }
     }
 
@@ -34,44 +35,51 @@ public:
         int eaten = 0; // персональный счетчик съеденных наггетсов
 
         while (true) {
-            std::lock_guard<std::mutex> lock(m);
 
             if ((std::chrono::high_resolution_clock::now() - start) >= std::chrono::seconds(5)) // скорее бы прошло 5 дней
             {
-                std::cout << "Прошло 5 дней => Кук уволился сам!" << std::endl;
+                m.lock();
+                std::cout << "\033[1;32mПрошло 5 дней => Кук уволился сам!\033[0m" << std::endl;
                 exit(1); // конец программы
             }
 
+            m.lock();
             std::cout << "Толстяк " << name << " начал кушать!" << std::endl;
 
             if (name == "Glutton 1" && dish1 >= gluttony) { // смотри какой из толстяков ест и хватает ли ему еды в тарелке
                 dish1 -= gluttony; // кушает
                 eaten += gluttony; // считаем для этого толстяка
                 totalEaten += gluttony; // считаем для всех толстяков
+                m.unlock();
             } else if (name == "Glutton 2" && dish2 >= gluttony) {
                 dish2 -= gluttony;
                 eaten += gluttony;
                 totalEaten += gluttony;
+                m.unlock();
             } else if (name == "Glutton 3" && dish3 >= gluttony) {
                 dish3 -= gluttony;
                 eaten += gluttony;
                 totalEaten += gluttony;
+                m.unlock();
             } else {
-                std::cout << "Толстяку " << name << " не хватило еды => Кук уволен!" << std::endl;
+                std::cout << "\033[1;31mТолстяку " << name << " не хватило еды => Кук уволен!\033[0m" << std::endl;
                 exit(1); // конец программы
             }
 
             if (totalEaten >= death * 3) 
             {
-                std::cout << "Последний толстяк " << name << " лопнул => Кук остался без ЗП!" << std::endl;
+                m.lock();
+                std::cout << "\033[1;31mПоследний толстяк " << name << " лопнул => Кук остался без ЗП!\033[0m" << std::endl;
                 exit(1); // конец программы
             }
             if (eaten >= death)
             {
-                std::cout << "Толстяк " << name << " лопнул!" << std::endl;
+                m.lock();
+                std::cout << "\033[1;31mТолстяк " << name << " лопнул!\033[0m" << std::endl;
+                m.unlock();
                 return;
             }
-            std::this_thread::yield();
+            std::this_thread::sleep_for(std::chrono::milliseconds(1)); // искусственно создаю возможность начать работу другому потоку
         }
     }
 
@@ -85,8 +93,8 @@ private:
 };
 
 int main() {
-    int gluttony = 2; // коэффициент прожорливости  
-    int efficiencyFactor = 12; // коэффициент производительности   
+    int gluttony = 1; // коэффициент прожорливости  
+    int efficiencyFactor = 1; // коэффициент производительности   
 
     auto start = std::chrono::high_resolution_clock::now(); // засекаем время начала работы Кука
 
