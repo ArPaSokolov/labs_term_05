@@ -15,5 +15,3 @@ void CustomMutex::unlock() {
 CustomMutex::~CustomMutex() {
     CloseHandle(semaphore); // закрытие семафора
 }
-
-// о семафоре на событиях https://habr.com/ru/articles/476940/
