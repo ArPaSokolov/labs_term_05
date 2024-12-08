@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project source="2.7.1" version="1.0">
 This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
-<lib desc="#Wiring" name="0"/>
+<lib desc="#Wiring" name="0">
+    <tool name="Splitter">
+      <a name="fanout" val="32"/>
+      <a name="incoming" val="32"/>
+      <a name="appear" val="right"/>
+    </tool>
+    <tool name="Pin">
+      <a name="width" val="32"/>
+    </tool>
+    <tool name="Probe">
+      <a name="radix" val="16"/>
+    </tool>
+    <tool name="Tunnel">
+      <a name="width" val="2"/>
+    </tool>
+    <tool name="Constant">
+      <a name="width" val="10"/>
+      <a name="value" val="0x0"/>
+    </tool>
+  </lib>
   <lib desc="#Gates" name="1"/>
   <lib desc="#Plexers" name="2"/>
   <lib desc="#Arithmetic" name="3"/>
-  <lib desc="#Memory" name="4"/>
+  <lib desc="#Memory" name="4">
+    <tool name="ROM">
+      <a name="contents">addr/data: 8 8
+0
+</a>
+    </tool>
+  </lib>
   <lib desc="#I/O" name="5"/>
   <lib desc="#Base" name="6">
     <tool name="Text Tool">
@@ -15,7 +40,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
       <a name="valign" val="base"/>
     </tool>
   </lib>
-  <main name="main"/>
+  <main name="Гарвардская архитектура"/>
   <options>
     <a name="gateUndefined" val="ignore"/>
     <a name="simlimit" val="1000"/>
@@ -48,60 +73,87 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <tool lib="1" name="AND Gate"/>
     <tool lib="1" name="OR Gate"/>
   </toolbar>
-  <circuit name="main">
-    <a name="circuit" val="main"/>
+  <circuit name="Гарвардская архитектура">
+    <a name="circuit" val="Гарвардская архитектура"/>
     <a name="clabel" val=""/>
     <a name="clabelup" val="east"/>
     <a name="clabelfont" val="SansSerif plain 12"/>
-    <wire from="(220,140)" to="(220,270)"/>
-    <wire from="(240,90)" to="(240,160)"/>
-    <wire from="(210,350)" to="(260,350)"/>
-    <wire from="(260,260)" to="(260,270)"/>
-    <wire from="(260,340)" to="(260,350)"/>
-    <wire from="(260,180)" to="(260,190)"/>
-    <wire from="(220,270)" to="(260,270)"/>
-    <wire from="(200,90)" to="(240,90)"/>
-    <wire from="(230,190)" to="(260,190)"/>
-    <wire from="(280,90)" to="(300,90)"/>
-    <wire from="(160,160)" to="(160,200)"/>
-    <wire from="(180,120)" to="(260,120)"/>
-    <wire from="(240,320)" to="(250,320)"/>
-    <wire from="(240,240)" to="(250,240)"/>
-    <wire from="(240,160)" to="(250,160)"/>
-    <wire from="(100,220)" to="(100,280)"/>
-    <wire from="(230,130)" to="(230,190)"/>
-    <wire from="(260,110)" to="(260,120)"/>
-    <wire from="(210,150)" to="(210,350)"/>
-    <wire from="(180,130)" to="(230,130)"/>
-    <wire from="(300,90)" to="(300,110)"/>
-    <wire from="(240,240)" to="(240,320)"/>
-    <wire from="(240,160)" to="(240,240)"/>
-    <wire from="(120,200)" to="(160,200)"/>
-    <wire from="(180,140)" to="(220,140)"/>
-    <wire from="(180,150)" to="(210,150)"/>
-    <wire from="(110,140)" to="(140,140)"/>
-    <wire from="(240,90)" to="(250,90)"/>
-    <comp lib="4" loc="(280,160)" name="Register"/>
-    <comp lib="2" loc="(360,130)" name="Multiplexer"/>
-    <comp lib="4" loc="(280,240)" name="Register"/>
-    <comp lib="5" loc="(100,280)" name="Button">
+    <wire from="(490,240)" to="(490,310)"/>
+    <wire from="(380,130)" to="(380,200)"/>
+    <wire from="(690,190)" to="(740,190)"/>
+    <wire from="(180,130)" to="(180,200)"/>
+    <wire from="(600,130)" to="(780,130)"/>
+    <wire from="(580,200)" to="(630,200)"/>
+    <wire from="(130,220)" to="(130,300)"/>
+    <wire from="(380,210)" to="(380,290)"/>
+    <wire from="(400,130)" to="(400,220)"/>
+    <wire from="(180,300)" to="(660,300)"/>
+    <wire from="(360,210)" to="(380,210)"/>
+    <wire from="(600,180)" to="(630,180)"/>
+    <wire from="(130,300)" to="(150,300)"/>
+    <wire from="(380,290)" to="(660,290)"/>
+    <wire from="(180,200)" to="(190,200)"/>
+    <wire from="(770,190)" to="(780,190)"/>
+    <wire from="(690,290)" to="(750,290)"/>
+    <wire from="(750,210)" to="(750,290)"/>
+    <wire from="(380,200)" to="(420,200)"/>
+    <wire from="(360,220)" to="(360,310)"/>
+    <wire from="(150,200)" to="(180,200)"/>
+    <wire from="(560,200)" to="(580,200)"/>
+    <wire from="(670,190)" to="(690,190)"/>
+    <wire from="(130,300)" to="(130,340)"/>
+    <wire from="(400,220)" to="(420,220)"/>
+    <wire from="(330,200)" to="(340,200)"/>
+    <wire from="(780,130)" to="(780,190)"/>
+    <wire from="(180,130)" to="(380,130)"/>
+    <wire from="(600,130)" to="(600,180)"/>
+    <wire from="(360,310)" to="(490,310)"/>
+    <wire from="(400,130)" to="(600,130)"/>
+    <comp lib="4" loc="(330,200)" name="RAM">
+      <a name="addrWidth" val="3"/>
+      <a name="dataWidth" val="2"/>
+      <a name="bus" val="separate"/>
+    </comp>
+    <comp lib="4" loc="(560,200)" name="RAM">
+      <a name="addrWidth" val="3"/>
+      <a name="bus" val="separate"/>
+    </comp>
+    <comp lib="6" loc="(263,150)" name="Text">
+      <a name="text" val="Команды"/>
+      <a name="font" val="SansSerif plain 16"/>
+    </comp>
+    <comp lib="0" loc="(580,200)" name="Probe">
+      <a name="facing" val="west"/>
+      <a name="radix" val="10unsigned"/>
+    </comp>
+    <comp lib="1" loc="(690,290)" name="AND Gate">
+      <a name="size" val="30"/>
+      <a name="inputs" val="3"/>
+    </comp>
+    <comp lib="6" loc="(490,150)" name="Text">
+      <a name="text" val="Данные"/>
+      <a name="font" val="SansSerif plain 16"/>
+    </comp>
+    <comp lib="5" loc="(130,340)" name="Button">
       <a name="facing" val="north"/>
     </comp>
-    <comp lib="4" loc="(280,320)" name="Register"/>
-    <comp lib="4" loc="(120,200)" name="Counter">
-      <a name="width" val="2"/>
-      <a name="max" val="0x0"/>
+    <comp lib="4" loc="(150,200)" name="Counter">
+      <a name="width" val="3"/>
+      <a name="max" val="0x7"/>
     </comp>
-    <comp lib="4" loc="(280,90)" name="Register"/>
-    <comp lib="0" loc="(110,140)" name="Pin">
-      <a name="tristate" val="false"/>
+    <comp lib="6" loc="(335,73)" name="Text">
+      <a name="text" val="Гарвардская архитектура"/>
+      <a name="font" val="SansSerif plain 22"/>
     </comp>
-    <comp lib="0" loc="(200,90)" name="Pin">
-      <a name="width" val="8"/>
-      <a name="tristate" val="false"/>
+    <comp lib="0" loc="(340,200)" name="Splitter">
+      <a name="appear" val="right"/>
     </comp>
-    <comp lib="2" loc="(140,140)" name="Demultiplexer">
-      <a name="select" val="2"/>
+    <comp lib="4" loc="(770,190)" name="Register"/>
+    <comp lib="1" loc="(180,300)" name="NOT Gate"/>
+    <comp lib="3" loc="(670,190)" name="Adder"/>
+    <comp lib="0" loc="(690,190)" name="Probe">
+      <a name="facing" val="west"/>
+      <a name="radix" val="10unsigned"/>
     </comp>
   </circuit>
 </project>
